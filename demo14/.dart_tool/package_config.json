@@ -1,0 +1,20 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "date_format",
+      "rootUri": "file:///C:/Users/chene/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/date_format-2.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "xxx",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "2.10"
+    }
+  ],
+  "generated": "2022-04-14T03:58:58.537263Z",
+  "generator": "pub",
+  "generatorVersion": "2.16.1"
+}

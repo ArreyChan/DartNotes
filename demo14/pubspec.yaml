@@ -1,0 +1,6 @@
+name: xxx
+description: A simple API to format dates.
+environment:
+  sdk: '>=2.10.0 < 3.0.0'
+dependencies:
+  date_format: ^2.0.6
