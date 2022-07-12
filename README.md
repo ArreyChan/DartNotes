@@ -2,7 +2,7 @@
 
 <p align="left"><img src="https://img.shields.io/badge/dart-v2.17.x-%2358B2DC"/></p>
 
-## 一.安装
+## 一、安装
 
 安装SDK路径：**https://dart.dev/get-dart**
 
@@ -16,12 +16,11 @@ brew install dart
 
 - 出现乱码需要在`settings.json`文件中配置：`"code-runner.runInTerminal":true`
 
-## 二.数据类型
+## 二、数据类型
 
-### 1.main()
+### 1、main()
 
->Every app must have a top-level main() function, which serves as the entrypoint to the app.
->每个应用程序都必须具有一个顶级函数main()，这个函数是应用程序的入口函数
+>Every app must have a top-level main() function, which serves as the entrypoint to the app.<br />每个应用程序都必须具有一个顶级函数main()，这个函数是应用程序的入口函数
 
 ```dart
 //当入口函数没有返回值时，建议添加void约束，令返回类型为空
@@ -48,7 +47,7 @@ print(num);///备注2
 //备注3
 ```
 
-### 2.标识符（Identifiers）
+### 2、标识符（Identifiers）
 
 1. 标识符以字母或下划线（_）开头，后跟任意字母，数字，下划线，$组合。
 2. 标识符开头不是能数字，`var 2er='arrey' //error`。
@@ -68,7 +67,7 @@ print(name);//errui
 
 6. 标识符名称建议见名思义，变量，常量名建议用名词，函数名用动词。
 
-#### 2.1.变量（Variables）
+#### 2.1、变量（Variables）
 
 1. 常见定义变量的两种方式:
    - 显式声明变量类型，`String str = 'arrey';//声明字符串类型变量`
@@ -77,10 +76,9 @@ print(name);//errui
 2. 空安全（null safety）
 3. late 变量
 
-#### 2.2.常量（Constant）：final & const
+#### 2.2、常量（Constant）：final & const
 
->If you never intend to change a variable, use final or const, either instead of var or in addition to a type.
->如果你不改变一个变量，使用final或者const，用于代替var或者作为一个类型补充
+>If you never intend to change a variable, use final or const, either instead of var or in addition to a type.<br />如果你不改变一个变量，使用final或者const，用于代替var或者作为一个类型补充
 
 ```dart
 //const
