@@ -76,7 +76,7 @@ print(name);//errui
 2. 空安全（null safety）
 3. late 变量
 
-#### 2.2、常量（Constant）：final & const
+#### 2.2、常量（Constant）：final & const 
 
 >If you never intend to change a variable, use final or const, either instead of var or in addition to a type.<br />如果你不改变一个变量，使用final或者const，用于代替var或者作为一个类型补充
 
@@ -105,5 +105,53 @@ const name;//error
 final a = new DateTime.now();
 print(a); //2022-03-12 18:43:31.182958
 const a=new DateTime.now();   //error
+```
+
+### 3、内置类型（Built-in types）
+
+#### 3.1、Numbers (int, double)
+
+1. int 整型
+2. double 浮点型
+3. 运算符：+ - * / %
+
+```dart 
+var a = 0xDEADBEEF;
+var b = 1.42e5;
+//double 既可以是整型 也可是浮点型
+double b1 = 1; //等价于 double b1 = 1.0
+var b2 = a + b1;
+print(a.runtimeType); //int
+print(b.runtimeType); //double
+print(b1); //1.0
+print(b2.runtimeType); //double
+```
+
+#### 3.2、Strings (String)
+
+1. 字符串定义方式
+
+```dart 
+var s1 = 'Single quotes work well for string literals.';
+var s2 = "Double quotes work just as well.";
+String s3 = 'It\'s easy to escape the string delimiter.';
+String s4 = "It's even easier to use the other delimiter.";
+print(s1 + s2 + s3 + s4);
+//使用三个单引号或者三个双引号可以打印多行代码
+var s5 = '''
+  this is s5
+  this is s5
+  this is s5
+''';
+print(s5);
+```
+
+2. 字符串拼接
+
+```dart
+var s6 = 'arrey';
+String s7 = "chan";
+print("$s6 $s7");//arrey chan
+print(s6 + ' ' + s7);//arrey chan
 ```
 

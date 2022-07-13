@@ -58,7 +58,7 @@ void main() {
   // print(l6.length);
   // l6.length=0;  //修改集合的长度   报错
 
-//通过以下方法可以改变长度
+//通过直接创建[]方式可以改变长度
   // var l7=<String>["张三","李四"];
   // print(l7.length);  //2
   // l7.length=0;  //可以改变的
