@@ -2,6 +2,8 @@
 
 <p align="left"><img src="https://img.shields.io/badge/dart-v2.17.x-%2358B2DC"/></p>
 
+**参考链接：**https://dart.dev/guides/language/language-tour
+
 ## 一、安装
 
 安装SDK路径：**https://dart.dev/get-dart**
@@ -349,9 +351,49 @@ print(new String.fromCharCodes(r2)); //♥  😅  😎  👻  🖖  👍
 
 >一个 Symbol 对象表示 Dart 程序中声明的运算符或者标识符<br />通过字面量 Symbol ，也就是标识符前面添加一个 # 号，来获取标识符的 Symbol，如：#radix。<br />Symbol 字面量是编译时常量。
 
-### 4、类型判断
+## 三、运算符（Operators）
 
-- `is`关键词判断从服务器或用户输入获取数据的类型
+### 1、算术运算符（Arithmetic operators）
+
+```dart 
+int a = 13;
+int b = 5;
+
+print(a + b); //加
+print(a - b); //减
+print(a * b); //乘
+print(a / b); //除
+print(a % b); //取余
+print(a ~/ b); //取整
+
+var c = a * b;
+print('--------');
+print(c);
+```
+
+### 2、关系运算符（Relational operators）
+
+```dart 
+int a = 5;
+int b = 3;
+
+print(a == b); //判断是否相等
+print(a != b); //判断是否不等
+print(a > b); //判断是否大于
+print(a < b); //判断是否小于
+print(a >= b); //判断是否大于等于
+print(a <= b); //判断是否小于等于
+
+if (a > b) {
+  print('a大于b');//right
+} else {
+  print('a小于b');
+}
+```
+
+### 3、类型判断运算符（Type test operators）
+
+- `is`，`is!`关键词判断从服务器或用户输入获取数据的类型
 
 ```dart 
 var str1 = '1234';
@@ -374,9 +416,19 @@ if (str is String) {
 } else {
   print('其他类型');
 }
+
+var str2 = true;
+// ignore: unnecessary_type_check
+if (str2 is! bool) {
+  print("不是Boolean类型");
+} else {
+  print(str2); //true
+}
 ```
 
-- dart可以使用assert在debug时进行类型断言
+- `as` 是当且仅当你确定这个未知对象属于某种类型的时候，使用其将这个对象转为该类型；也可以给包起别名时使用，例如：`import 'package:http/http.dart' as erhttp;`
+
+- dart可以使用`assert`在debug时进行类型断言
 
 ```dart
 var p = {
