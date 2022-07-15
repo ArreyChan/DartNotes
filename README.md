@@ -155,3 +155,235 @@ print("$s6 $s7");//arrey chan
 print(s6 + ' ' + s7);//arrey chan
 ```
 
+#### 3.3、Booleans (bool)
+
+```dart 
+bool b1 = true;
+
+print(b1);
+
+var b2 = 123; //int
+
+var b3 = '123'; //string
+
+if (b2 == b3) {
+ print('b2=b3');
+} else {
+//在dart中不会进行类型的转化，int和string在类型上就不相等
+ print('b2!=b3'); //b2!=b3 
+}
+
+var b4 = 0 / 0;
+print(b4.isNaN); //true
+```
+
+#### 3.4、Lists (List)
+
+  1. 直接定义
+
+  ```dart
+  var l1 = ["arrey", 120, true];
+  print(l1); //[arrey, 120, true]
+  print(l1.length); //3
+  print(l1[1]); //120
+  ```
+
+  2. 指定类型
+
+  ```dart
+  var l2 = <String>["arrey", "errui"];
+  print(l2); //[arrey, errui]
+  var l2int = <int>[50, 30];
+  print(l2int); //[50, 30]
+  ```
+
+  3. 增加数据，通过[]直接定义的list的容量可以增减
+
+  ```dart
+  var l3 = [];
+  print(l3); //[]
+  print(l3.length); //0
+  l3.add("arrey");
+  l3.add("errui");
+  l3.add(120);
+  print(l3); //[arrey, errui, 120]
+  print(l3.length); //3
+  ```
+
+  4. 扩展运算符支持
+
+  ```dart
+  //扩展运算符用于链接两个列表
+  var l4 = [true, ...l3];
+  print(l4); //[true, arrey, errui, 120]
+
+  //如果l3s是空值，则可以使用？来避免错误异常
+  var l3s;
+  var l4s = [999, ...?l3s];
+  print(l4s.length);//1
+  ```
+
+  5. 使用内置方法filled创建一个固定长度的列表
+
+  ```dart
+  var l5 = List.filled(2, "1"); //创建一个固定长度的集合
+  print(l5); //[1, 1]
+  //注意：不指定list的类型，会根据创建的初始数据自动推导数据类型
+
+  //创建指定类型的列表
+  var l5s=List<String>.filled(2, "");
+  l5s[0]="string";
+  l5s[0]=222;//error
+  print(l5s);//[string, ]
+
+  //注意：通过List.filled创建的集合长度是固定,无法修改长度
+  l5[0] = "arrey"; //修改集合的内容
+  //l5.add("王五");  //error
+  print(l5); //[1, 1]
+  ```
+
+  6. List支持使用if&for语法
+
+  ```dart 
+  var l6OfInts = [1, 2, 3];
+  var l6 = ['#0', for (var i in l6OfInts) '#$i'];
+  print(l6); //[#0, #1, #2, #3]
+  var promoActive = true;
+  var nav = ['Home', 'Furniture', 'Plants', if (promoActive) 'Outlet'];
+  print(nav);//[Home, Furniture, Plants, Outlet]
+  ```
+
+#### 3.5、Sets (Set)
+
+> 在 Dart 中 Set 是一个元素唯一且无序的集合。 Dart 为 Set 提供了 Set 字面量和 Set 类型。
+
+1. 新建一个Set类型的集合
+   
+```dart 
+var e1 = {'fluorine', 'chlorine', 'bromine', 'iodine', 'astatine'};
+print(e1.runtimeType); //_CompactLinkedHashSet<String>，这个集合的类型是Set类型
+print(e1); //{fluorine, chlorine, bromine, iodine, astatine}
+```
+
+2. 写法规范
+
+```dart 
+var e2 = <String>{};
+Set<String> e2s = {}; //也支持这种写法
+
+var e3 = {}; //这样会创建一个 Map ，而不是 Set 。
+print(e3.runtimeType); //_InternalLinkedHashMap<dynamic, dynamic>
+```
+
+>因为先有的 Map 字母量语法，所以 {} 默认是 Map 类型。<br />如果忘记在 {} 上注释类型或赋值到一个未声明类型的变量上， 那么 Dart 会创建一个类型为 Map<dynamic, dynamic> 的对象。
+
+3. 内置方法
+
+```dart 
+e2.add('fluorine');
+e2.addAll(e1);
+print(e2.length); //5
+
+final e4 = const {'111', '2222', 222, 3};
+//在字面量前添加const，会创建一个编译时 Set 常量，不可以添加新的值
+e4.add('sss'); //error
+print(e4); //{111, 2222, 222, 3}
+```
+
+#### 3.6、Maps(Map)
+
+>一个map（字典）是一个关联键值的对象，Dart 中 Map 通过 Map 字面量 和 Map 类型来实现。
+
+```dart
+//定义Map的方式
+//第一种
+var person = {
+ "name": "arrey",
+ "age": 120,
+ "work": ["开发", "背锅侠"]
+};
+print(person); //{name: arrey, age: 120, work: [开发, 背锅侠]}
+print(person["work"]); //[开发, 背锅侠]
+//第二种
+var p = new Map();
+
+p["name"] = "errui";
+p["age"] = 23;
+p["work"] = ["产品", "提需求"];
+print(p); //{name: errui, age: 23, work: [产品, 提需求]}
+print(p["age"]); //23
+//如果 Map 中不包含所要查找的 key，那么 Map 返回 null
+print(p["address"]);//null
+//使用 .length 函数获取当前 Map 中的键值对数量
+print(p.length);//3
+
+//第三种，创建Map类型的常量
+final constantMap = const {
+  2: 'helium',
+  10: 'neon',
+  18: 'argon',
+};
+//constantMap[2] = 'Helium';不支持修改值
+```
+
+- *Map类型和List一样支持扩展运算符(... and ...?)和集合if&for*
+
+#### 3.7、Runes(Runes)
+
+> Because a Dart string is a sequence of UTF-16 code units, expressing Unicode code points within a string requires special syntax.<br />因为Dart字符串是一系列的UTF-16代码单元，因此要在字符串中表示Unicode（32位）值需要特殊语法支持。
+
+```dart 
+var r = '\u{1f44f}';
+print(r); //👏
+print(r.codeUnits); //[55357, 56399]
+print(r.runes.toList()); //[128079]
+
+//表示Unicode常用方式是\uXXXX，这里 XXXX 是一个4位的16进制数。
+//对于非4数值的情况，可以将编码值用{}约束。
+Runes r2 = new Runes(
+    '\u2665  \u{1f605}  \u{1f60e}  \u{1f47b}  \u{1f596}  \u{1f44d}');
+print(new String.fromCharCodes(r2)); //♥  😅  😎  👻  🖖  👍
+```
+
+#### 3.8、Symbol
+
+>一个 Symbol 对象表示 Dart 程序中声明的运算符或者标识符<br />通过字面量 Symbol ，也就是标识符前面添加一个 # 号，来获取标识符的 Symbol，如：#radix。<br />Symbol 字面量是编译时常量。
+
+### 4、类型判断
+
+- `is`关键词判断从服务器或用户输入获取数据的类型
+
+```dart 
+var str1 = '1234';
+// ignore: unnecessary_type_check
+if (str1 is String) {
+  print('是string类型'); //right
+} else if (str1 is int) {
+  print('int');
+} else {
+  print('其他类型');
+}
+
+var str = 123;
+
+if (str is String) {
+  print('是string类型');
+// ignore: unnecessary_type_check
+} else if (str is int) {
+  print('int'); //right
+} else {
+  print('其他类型');
+}
+```
+
+- dart可以使用assert在debug时进行类型断言
+
+```dart
+var p = {
+    "name": "arrey",
+    "age": 23,
+    "work": ["开发", "背锅侠"]
+  };
+assert(p["age"] == 23);
+assert(p["age"] == 22); //出现异常
+```
