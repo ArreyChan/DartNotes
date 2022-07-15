@@ -2,7 +2,7 @@
 
 <p align="left"><img src="https://img.shields.io/badge/dart-v2.17.x-%2358B2DC"/></p>
 
-**参考链接：**https://dart.dev/guides/language/language-tour
+**参考链接**：https://dart.dev/guides/language/language-tour
 
 ## 一、安装
 
