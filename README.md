@@ -439,3 +439,181 @@ var p = {
 assert(p["age"] == 23);
 assert(p["age"] == 22); //出现异常
 ```
+
+### 4、逻辑运算符（Logical operators）
+
+```dart
+//取反 !
+bool flag = false;
+print(!flag); //取反,true
+
+//或者 || 
+//全为false的话值为false 否则值为true
+bool a1 = false;
+bool b1 = false;
+
+print(a1 || b1); //false
+
+//并且 && 
+//全部为true的话值为true 否则值为false
+bool a = true;
+bool b = true;
+
+print(a && b); //true
+```
+
+```dart
+//example
+int score = 90;
+String subject = 'cs';
+if (score == 100 && subject == 'cs') {
+  print("$score ---- $subject");
+} else {
+  print('匹配错误'); //right
+}
+if (score == 90 || subject == 'cs') {
+  print("$score ---- $subject"); //right
+} else {
+  print('匹配错误');
+}
+```
+
+### 5、赋值运算符（Assignment operators）
+
+- 基础：`=`，`??=`
+
+```dart 
+var b;
+b ??= 23; //表示如果b为空的话把 23赋值给b，
+print(b); //23
+
+var b1=1;
+b1 ??= 23;//错误写法
+print(b1);//1
+```
+
+- 复合：其他运算符与赋值运算符`=`的组合
+
+![dart2](https://img.errui.xin/BlogImage/frontend/dart/dart2.png)
+
+```dart 
+var a1 = 4;
+a1 *= 3; //等价于a1=a1*3;
+print(a1); //12
+
+var a2 = 49;
+a2 ~/= 10;//除法，返回一个整数结果
+print(a2); //4
+```
+
+### 6、位运算符（Bitwise and shift operators）
+
+```dart 
+final value = 0x22;
+print(value); //34(10进制)
+print(value >> 4); //2
+print(value << 4); //544
+
+print(value ^ 0x0f); //45 --- 0x2d
+print(value & 0x0f); //2 --- 0x02
+print(value & ~0x0f); //32 --- 0x20
+print(value | 0x0f); //47 --- 0x2f
+```
+
+### 7、条件表达式（Conditional expressions）
+
+- 条件表达式：`if  else`，`switch case`
+
+```dart 
+if (flag) {
+  print('true'); //right
+  // ignore: dead_code
+} else {
+  print('false');
+}
+
+var sex = "女";
+switch (sex) {
+  case "男":
+    print('性别是男');
+    break;
+  case "女":
+    print('性别是女'); //right
+    break;
+  default:
+    print('传入参数错误');
+    break;
+}
+```
+
+- Dart简化条件判断运算符
+
+  1.`condition ? expr1 : expr2`，如果条件为true，则返回expr1的结果，否则就返回expr2（适合应用在判断条件为Boolean型的场景）
+
+  ```dart 
+  bool tree = false;
+  // ignore: dead_code
+  String c = tree ? '我是true' : '我是false';
+  print(c); //我是false
+  ```
+
+  2.`expr1 ?? expr2`，如果expr1不为空值，则返回它的结果，否则就返回expr2的值（适合用于判断是否为null的场景）
+
+  ```dart 
+  var a;
+  var b = a ?? 10;
+
+  print(b); //10
+
+  var a1 = 22;
+  //错误写法，仅限举例
+  var b1 = a1 ?? 10; //a1不是null，不适用??判断
+
+  print(b1); //22
+  ```
+
+
+### 8、级联符号（Cascade notation）
+
+- `..  ?..`允许访问级联对象的属性或调用该对象的方法，省去创建临时变量的步骤（此举目的时写出更加优雅的code）
+- 严格来说，`..`这种符号并不是运算符，只是Dart语法的一部分
+
+```dart
+void main(){
+   Person person = new Person('arrey', 120)
+    ..name = 'errui'
+    ..getInfo();//errui----120
+    person.setInfo(12)..getInfo();//error person.setInfo() 函数调用返回 void， 不能在 void 对象上进行级联操作。
+  //普通写法
+  Person person = new Person('arrey', 120);
+  person.name = 'errui';
+  person.getInfo(); //errui----120
+}
+class Person {
+  String name;
+  int age;
+  Person(this.name, this.age);
+  void getInfo() {
+    print("${this.name}----${this.age}");
+  }
+  void setInfo(int age) {
+    this.age = age;
+  }
+}
+
+```
+```dart 
+//进阶，级联符号可支持嵌套写法
+final addressBook = (AddressBookBuilder()
+  ..name = 'jenny'
+  ..email = 'jenny@example.com'
+  ..phone = (PhoneNumberBuilder()
+        ..number = '415-555-0100'
+        ..label = 'home')
+      .build())
+.build();
+```
+
+### 9、其他运算符
+
+- `!`：空断言运算符：将表达转化成底层非空类型，如果转换失败则抛出异常，`fun!.bar`表示fun非null并选择属性bar，除非fun为null，否则不会抛出异常。
