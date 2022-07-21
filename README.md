@@ -617,3 +617,70 @@ final addressBook = (AddressBookBuilder()
 ### 9、其他运算符
 
 - `!`：空断言运算符：将表达转化成底层非空类型，如果转换失败则抛出异常，`fun!.bar`表示fun非null并选择属性bar，除非fun为null，否则不会抛出异常。
+
+### 10、类型转换
+
+1. `int/double.parse()`将String类型转换成int类型
+
+```dart 
+String str = '123';
+var num = int.parse(str);
+print(num.runtimeType); //int
+
+String str1 = '23.1';
+var num1 = double.parse(str1);
+print(num1.runtimeType); //double
+```
+
+- 如果服务器传给数据为空值...
+
+```dart 
+String price = '';
+
+var myNum = double.parse(price);
+
+print(myNum is double);//error:Invalid double
+```
+```dart 
+//使用try...catch...结构，如果传入空值，则抛出异常，输出结果为0
+String price1 = '';
+try {
+  var myNum = double.parse(price1);
+
+  print(myNum);
+} catch (err) {
+  print(0);
+}
+```
+
+2. `toString()`将Number类型转换成String类型 
+
+```dart 
+var num4 = 12;
+
+var str4 = num4.toString();
+
+print(str4 is String); //true
+```
+
+3. 一些特殊情况
+
+  - `isEmpty`被用来判断得到的字符串是否为空
+
+  ```dart 
+  var str = '';
+  //不可以使用null，null是空值，不是一个实例化的对象，''是空字符串，是一个已经实例化的数据对象
+  if (str.isEmpty) {
+  print('str空');//right
+  } else {
+  print('str不为空');
+  }
+  ```
+
+   - 一种特殊情况
+
+  ```dart 
+  var myNum2 = 0 / 0;
+  print(myNum2); //返回结果是NaN
+  ```
+

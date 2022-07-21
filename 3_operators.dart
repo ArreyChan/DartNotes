@@ -63,6 +63,37 @@ void main() {
   Person person1 = new Person('arrey', 120);
   person1.name = 'errui';
   person1.getInfo(); //errui----120
+
+  String str = '123';
+  var num = int.parse(str);
+  print(num.runtimeType); //int
+
+  String str1 = '23.1';
+  var num1 = double.parse(str1);
+  print(num1.runtimeType); //double
+
+  String price1 = '';
+  try {
+    var myNum = double.parse(price1);
+
+    print(myNum);
+  } catch (err) {
+    print(0);
+  }
+  var str4 = '';
+  if (str4.isEmpty) {
+    print('str4空');
+  } else {
+    print('str4不为空');
+  }
+
+  var myNum2 = 0 / 0;
+
+  print(myNum2); //NaN
+
+  if (myNum2.isNaN) {
+    print('NaN');
+  }
 }
 
 class Person {
