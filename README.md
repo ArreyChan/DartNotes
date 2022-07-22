@@ -428,18 +428,6 @@ if (str2 is! bool) {
 
 - `as` 是当且仅当你确定这个未知对象属于某种类型的时候，使用其将这个对象转为该类型；也可以给包起别名时使用，例如：`import 'package:http/http.dart' as erhttp;`
 
-- dart可以使用`assert`在debug时进行类型断言
-
-```dart
-var p = {
-    "name": "arrey",
-    "age": 23,
-    "work": ["开发", "背锅侠"]
-  };
-assert(p["age"] == 23);
-assert(p["age"] == 22); //出现异常
-```
-
 ### 4、逻辑运算符（Logical operators）
 
 ```dart
@@ -532,18 +520,6 @@ if (flag) {
   print('false');
 }
 
-var sex = "女";
-switch (sex) {
-  case "男":
-    print('性别是男');
-    break;
-  case "女":
-    print('性别是女'); //right
-    break;
-  default:
-    print('传入参数错误');
-    break;
-}
 ```
 
 - Dart简化条件判断运算符
@@ -562,13 +538,13 @@ switch (sex) {
   ```dart 
   var a;
   var b = a ?? 10;
-
+  
   print(b); //10
-
+  
   var a1 = 22;
   //错误写法，仅限举例
   var b1 = a1 ?? 10; //a1不是null，不适用??判断
-
+  
   print(b1); //22
   ```
 
@@ -663,7 +639,7 @@ var str4 = num4.toString();
 print(str4 is String); //true
 ```
 
-3. 一些特殊情况
+1. 一些特殊情况
 
   - `isEmpty`被用来判断得到的字符串是否为空
 
@@ -683,4 +659,273 @@ print(str4 is String); //true
   var myNum2 = 0 / 0;
   print(myNum2); //返回结果是NaN
   ```
+
+## 四、控制流程语句
+
+### 1、自增自减
+
+- 在赋值运算里面 如果++ -- 写在前面 这时候先运算 再赋值，如果++ --写在后面 先赋值后运行运算
+
+```dart 
+//不进行赋值没有区别，结果和a++相同
+var a = 10;
+++a;
+print(a);//11
+
+var b = 10;
+b++;
+print(b);//11
+```
+
+### 2、if&else和for循环
+
+1. Dart支持if-else语句，并且else是可选的
+
+```dart 
+var c = 20;
+if (c.runtimeType == int) {
+ print('正确的');
+}
+//简化写法参考 ### 三——>7、条件表达式（Conditional expressions）
+```
+
+2. for循环
+
+```dart 
+//template
+for (int i=1;i<=100;i++){
+  print(i);
+}
+//step01:声明变量int i = 1;
+//step02:判断i <=100;
+//step03:print(i);
+//step04:i++;
+//step05:进行step02,直到判断为false;
+```
+
+- 例子
+
+```dart 
+//打印List内容
+List d = [
+  {"title": "舅舅111"},
+  {"title": "舅舅222"},
+  {"title": "舅舅333"}
+];
+
+for (var i = 0; i < d.length; i++) {
+  print(d[i]['title']);
+}
+//打印一个二维列表
+List e = [
+  {
+    "cate": '省份',
+    "news": [
+      {"title": "安徽"},
+      {"title": "江苏"},
+      {"title": "浙江"}
+    ]
+  },
+  {
+    "cate": '城市',
+    "news": [
+      {"title": "合肥"},
+      {"title": "南京"},
+      {"title": "杭州"}
+    ]
+  }
+];
+
+for (var i = 0; i < e.length; i++) {
+  print(e[i]["cate"]);
+  print('···············');
+  for (var j = 0; j < e[i]["news"].length; j++) {
+    print(e[i]["news"][j]["title"]);
+  }
+}
+```
+
+### 3、while and do-while 循环
+
+```dart 
+/**
+while(表达式/循环条件){语句/循环体}	
+		
+do{语句/循环体}while(表达式/循环条件);
+		
+注意： 循环条件中使用的变量需要经过初始化;循环体中，应有结束循环的条件，否则会造成死循环。
+*/
+void main(){
+  /*
+  //死循环
+  int f = 1;
+  while (f <= 10) {
+    print(f);
+  }
+  */
+  int f = 1;
+  while (f <= 10) {
+    print(f);
+    ++f;
+  }
+}
+```
+
+- while和do...while的区别
+
+```dart 
+//第一次循环条件不成立的情况下
+int g = 10;
+while (g < 2) {
+  print('g执行代码');
+}
+
+var g1 = 10;
+do {
+  print('g1执行代码');
+} while (g1 < 2);
+
+//输出结果：g1执行代码
+```
+
+### 4、break和continue
+
+```dart 
+/*
+	break:
+    1、在switch语句中使流程跳出switch结构。
+    2、在循环语句中使流程跳出当前循环,遇到break 循环终止，后面代码也不会执行 
+    3、在多层循环中,一个break语句只能向外跳出一层
+    4、break可以用在switch case中 也可以用在 for 循环和 while循环中
+
+  continue:
+  1、只能在循环语句中使用,使本次循环结束，即跳过循环体重下面尚未执行的语句，接着进行下次的是否执行循环的判断。
+  2、continue可以用在for循环以及 while循环中，但是不建议用在while循环中，不小心容易死循环
+*/
+
+//break语句只能向外跳出一层
+for (var i = 0; i < 5; i++) {
+  print('外层---$i');
+  for (var j = 0; j < 3; j++) {
+    if (j == 1) {
+      break;
+    }
+    print('里层---$j');
+  }
+}
+//while...break跳出循环
+var i = 1;
+
+while (i <= 10) {
+  if (i == 4) {
+    break;
+  }
+  print(i);
+  i++;
+}//123
+```
+
+- 区别
+
+```dart 
+//break:如果i=4跳出循环
+for (var i = 1; i <= 10; i++) {
+  if (i == 4) {
+    break; /*跳出循环体*/
+  }
+  print(i);
+}//123
+
+//continue:如果i等于4的话跳过
+for (var i = 1; i <= 10; i++) {
+  if (i == 4) {
+    continue; /*跳过当前循环体 然后循环还会继续执行*/
+  }
+  print(i);
+}//1235678910
+```
+
+### 5、switch语句
+
+```dart 
+//一个简单的例子
+var sex = "女";
+switch (sex) {
+  case "男":
+    print('性别是男');
+    break;
+  case "女":
+    print('性别是女'); //right
+    break;
+  default:
+    print('传入参数错误');
+    break;
+}
+```
+
+- 特殊情况
+
+```dart 
+//丢失break会报错
+var command = 'OPEN';
+switch (command) {
+  case 'OPEN':
+    executeOpen();
+    // ERROR: 丢失 break
+  case 'CLOSED':
+    executeClosed();
+    break;
+}
+
+//但是支持空case语句，允许程序以 fall-through 的形式执行，意思是如果case语句后面不加break，就依次执行下去，以满足某些特殊情况的要求。（不建议）
+var command = 'CLOSED';
+switch (command) {
+  case 'CLOSED': // Empty case falls through.
+  case 'NOW_CLOSED':
+    // 运行 CLOSED and NOW_CLOSED.
+    executeNowClosed();
+    break;
+}
+
+//如果需要在非空case中实现fall-through，可以使用 continue 语句结合 lable 的方式实现（很扭曲不建议）
+var command = 'CLOSED';
+switch (command) {
+  case 'CLOSED':
+    executeClosed();
+    continue nowClosed;
+  // Continues executing at the nowClosed label.
+
+  nowClosed:
+  case 'NOW_CLOSED':
+    // Runs for both CLOSED and NOW_CLOSED.
+    executeNowClosed();
+    break;
+}
+```
+
+_一个case子句允许有局部变量，该局部变量只在该子句范围内可见_
+
+### 6、Assert
+
+- dart可以使用`assert`在debug时进行类型断言，`assert`只在开发环境中有效，在生产环境中无效
+
+```dart
+var p = {
+    "name": "arrey",
+    "age": 23,
+    "work": ["开发", "背锅侠"]
+  };
+assert(p["age"] == 23);
+assert(p["age"] == 22); //出现异常
+
+// 确认变量值不为空。
+assert(text != null);
+
+// 确认变量值小于100。
+assert(number < 100);
+
+// 确认 URL 是否是 https 类型。
+assert(urlString.startsWith('https'));
+
+```
 
