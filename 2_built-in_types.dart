@@ -140,6 +140,7 @@ void main() {
   print(constantMap);
 
   //Rune
+
   var r = '\u{1f44f}';
   print(r); //👏
   print(r.codeUnits); //[55357, 56399]
